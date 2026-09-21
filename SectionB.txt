@@ -1,0 +1,36 @@
+SECTION B
+QUESTION 1
+
+Withdrawal()
+
+TC1
+
+Input: Amount = R500, Balance = R1000
+Expected Result: Withdrawal successful, Balance = R500
+Statement Coverage: 50%
+Branch Coverage: 50%
+
+TC2
+
+Input: Amount = R1500, Balance = R1000
+Expected Result: Insufficient Funds
+Statement Coverage: 100%
+Branch Coverage: 100%
+
+
+Deposit()
+
+TC1
+
+Input: Amount = R500
+Expected Result: Balance = R1500
+Statement Coverage: 50%
+Branch Coverage: 50%
+
+TC2
+
+Input: Amount = R0
+Expected Result: Error Message
+Statement Coverage: 100%
+Branch Coverage: 100%
+
