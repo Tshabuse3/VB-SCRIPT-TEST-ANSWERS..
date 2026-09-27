@@ -44,7 +44,7 @@ End Function
 
 Public Function getAccountNumber()
 
-    getAccountNumber = strAccountNo
+        getAccountNumber = "ACC-" & strAccountNo
 
 End Function
 
