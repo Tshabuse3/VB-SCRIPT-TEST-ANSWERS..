@@ -1,0 +1,4 @@
+| Test Case | Input                           | Expected Result     |
+| --------- | ------------------------------- | ------------------- |
+| TC1       | Balance = 1000, Withdraw = 500  | Balance becomes 500 |
+| TC2       | Balance = 1000, Withdraw = 1500 | Insufficient funds  |

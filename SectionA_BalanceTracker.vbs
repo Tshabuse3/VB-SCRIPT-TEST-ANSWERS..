@@ -1,4 +1,3 @@
-
 Option Explicit
 
 Class Account
@@ -7,6 +6,12 @@ Class Account
 Public strAccountNo
 Public strAccountHolder
 Public dblBalance
+
+Private Sub Class_Initialize()
+
+    dblBalance = 1000
+
+End Sub
 
 Public Function Withdrawal(dblAmount)
 
@@ -31,13 +36,15 @@ End Function
 
 Public Function CheckBalance()
 
+    MsgBox "Current Balance: R" & FormatNumber(dblBalance, 2)
+
     CheckBalance = dblBalance
 
 End Function
 
 Public Function getAccountNumber()
 
-    getAccountNumber = "ACC-" & strAccountNo
+    getAccountNumber = strAccountNo
 
 End Function
 
@@ -62,21 +69,20 @@ DIM dblAmount
 DIM dblNewBalance
 DIM strTitle
 
-strTitle = "*******SmartBalance Banking******"
+strTitle = "*******SmartBalance Banking System******"
 
 Set objAccount = New Account
 
 Do
 
-    strAccountNo = Trim(InputBox( _
-        "Enter your account number." & vbNewLine & _
-        "It must contain 7 to 10 digits.", _
-        strTitle))
+   strAccountNo = Trim(InputBox( _
+    "Please provide your account number for account verification.", _
+    strTitle))
 
+    
     If Len(strAccountNo) < 7 Or Len(strAccountNo) > 10 Or IsDigitsOnly(strAccountNo) = False Then
 
-        MsgBox "Account number must contain 7 to 10 digits.", _
-               vbExclamation, strTitle
+        MsgBox "Account number must contain 7 to 10 digits."
 
     End If
 
@@ -88,8 +94,7 @@ Do
 
     If strAccountHolder = "" Then
 
-        MsgBox "Account holder name cannot be empty.", _
-               vbExclamation, strTitle
+        MsgBox "Account holder name cannot be empty."
 
     End If
 
@@ -97,7 +102,6 @@ Loop While strAccountHolder = ""
 
 objAccount.strAccountNo = strAccountNo
 objAccount.strAccountHolder = strAccountHolder
-objAccount.dblBalance = 1000
 
 Do
 
@@ -126,13 +130,11 @@ Do
 
                 If dblAmount <= 0 Then
 
-                    MsgBox "Withdrawal amount must be greater than zero.", _
-                           vbExclamation, strTitle
+                    MsgBox "Withdrawal amount must be greater than zero."
 
                 ElseIf dblAmount > objAccount.dblBalance Then
 
-                    MsgBox "You cannot withdraw more than your current balance.", _
-                           vbExclamation, strTitle
+                    MsgBox "You cannot withdraw more than your current balance."
 
                 End If
 
@@ -141,8 +143,7 @@ Do
             dblNewBalance = objAccount.Withdrawal(dblAmount)
 
             MsgBox "Withdrawal successful." & vbNewLine & vbNewLine & _
-                   objAccount.getAccountDetails(), _
-                   vbInformation, strTitle
+                   objAccount.getAccountDetails()
 
         Case "2"
 
@@ -158,8 +159,7 @@ Do
 
                 If dblAmount <= 0 Then
 
-                    MsgBox "Deposit amount must be greater than zero.", _
-                           vbExclamation, strTitle
+                    MsgBox "Deposit amount must be greater than zero."
 
                 End If
 
@@ -168,8 +168,7 @@ Do
             dblNewBalance = objAccount.Deposit(dblAmount)
 
             MsgBox "Deposit successful." & vbNewLine & vbNewLine & _
-                   objAccount.getAccountDetails(), _
-                   vbInformation, strTitle
+                   objAccount.getAccountDetails()
 
         Case "3"
 
@@ -182,8 +181,7 @@ Do
 
                 If Len(strReceivingAccountNo) < 7 Or Len(strReceivingAccountNo) > 10 Or IsDigitsOnly(strReceivingAccountNo) = False Then
 
-                    MsgBox "Account number must contain 7 to 10 digits.", _
-                           vbExclamation, strTitle
+                    MsgBox "Account number must contain 7 to 10 digits."
 
                 End If
 
@@ -201,13 +199,11 @@ Do
 
                 If dblAmount <= 0 Then
 
-                    MsgBox "Transfer amount must be greater than zero.", _
-                           vbExclamation, strTitle
+                    MsgBox "Transfer amount must be greater than zero."
 
                 ElseIf dblAmount > objAccount.dblBalance Then
 
-                    MsgBox "You cannot transfer more than your current balance.", _
-                           vbExclamation, strTitle
+                    MsgBox "You cannot transfer more than your current balance."
 
                 End If
 
@@ -217,26 +213,22 @@ Do
 
             MsgBox "Transfer successful to ACC-" & strReceivingAccountNo & "." & _
                    vbNewLine & vbNewLine & _
-                   objAccount.getAccountDetails(), _
-                   vbInformation, strTitle
+                   objAccount.getAccountDetails()
 
         Case "4"
 
             dblNewBalance = objAccount.CheckBalance()
 
-            MsgBox objAccount.getAccountDetails(), _
-                   vbInformation, "Account Details"
+            MsgBox objAccount.getAccountDetails()
 
         Case "5"
 
             MsgBox "Thank you. Program closed." & vbNewLine & vbNewLine & _
-                   objAccount.getAccountDetails(), _
-                   vbInformation, strTitle
+                   objAccount.getAccountDetails()
 
         Case Else
 
-            MsgBox "Invalid option. Please select a number from 1 to 5.", _
-                   vbExclamation, strTitle
+            MsgBox "Invalid option. Please select a number from 1 to 5."
 
     End Select
 
